@@ -1,0 +1,45 @@
+{
+  "name": "mdast-typographer",
+  "version": "0.0.0",
+  "description": "Mdast plugin that fix your bad typography habits",
+  "main": "index.es5.js",
+  "scripts": {
+    "coverage": "isparta cover _mocha index.js -- --require babel-core/register",
+    "precoveralls": "npm run coverage",
+    "coveralls": "coveralls < coverage/lcov.info",
+    "test": "mocha --require babel-core/register",
+    "tdd": "npm test -- --watch",
+    "transpile": "babel index.js --out-file index.es5.js",
+    "prepublish": "npm run transpile",
+    "clean": "rimraf index.es5.js",
+    "push": "git push --follow-tags",
+    "postpublish": "npm-run-all clean push"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denysdovhan/mdast-typographer.git"
+  },
+  "keywords": [
+    "mdast",
+    "plugin",
+    "markdown",
+    "md"
+  ],
+  "author": "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/denysdovhan/mdast-typographer/issues"
+  },
+  "homepage": "https://github.com/denysdovhan/mdast-typographer#readme",
+  "devDependencies": {
+    "assert": "*",
+    "babel-cli": "^6.1.18",
+    "babel-core": "^6.1.21",
+    "babel-preset-es2015": "^6.1.18",
+    "coveralls": "*",
+    "isparta": "*",
+    "mocha": "*",
+    "npm-run-all": "*",
+    "rimraf": "*"
+  }
+}
