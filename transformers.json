@@ -1,0 +1,15 @@
+{
+  "apostrophes":  "typographic-apostrophes",
+  "plurals":      "typographic-apostrophes-for-possessive-plurals",
+  "arrows":       "typographic-arrows",
+  "copyright":    "typographic-copyright",
+  "currency":     "typographic-currency",
+  "ellipses":     "typographic-ellipses",
+  "em":           "typographic-em-dashes",
+  "en":           "typographic-en-dashes",
+  "math":         "typographic-math-symbols",
+  "quotes":       "typographic-quotes",
+  "registered":   "typographic-registered-trademark",
+  "spaces":       "typographic-single-spaces",
+  "trademark":    "typographic-trademark"
+}
