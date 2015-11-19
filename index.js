@@ -12,7 +12,7 @@ export default function attacher(
   } = {}
 ) {
   const tfs = Object.keys(TRANSFORMERS)
-    .filter(item => options[item] === undefined && true)
+    .filter(item => options[item] !== false && true)
     .map(item => require(TRANSFORMERS[item]));
 
   return function transformer(ast) {
