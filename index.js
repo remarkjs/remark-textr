@@ -7,12 +7,12 @@ export default function attacher(
   processor, {
     locale = 'en-us',
     before = [],
-    ...options,
+    modules = {},
     after = []
   } = {}
 ) {
   const tfs = Object.keys(TRANSFORMERS)
-    .filter(item => options[item] !== false && true)
+    .filter(item => modules[item] !== false && true)
     .map(item => require(TRANSFORMERS[item]));
 
   return function transformer(ast) {

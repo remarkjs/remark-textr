@@ -26,7 +26,9 @@ describe('mdast-typographer', () => {
   it('should remove disabled transformers', () =>
     equal(
       t(`Ellipses... and "quotes"`, {
-        ellipses: false
+        modules: {
+          ellipses: false
+        }
       }),
       `Ellipses... and “quotes”`
     )
