@@ -38,10 +38,10 @@ describe('mdast-typographer', () => {
 
   it('should use after transformers', () =>
     equal(
-      t(`Hello, "world"!`, {
+      t(`Hello, "world".`, {
         after: [(t) => t.replace('world', 'guys')]
       }),
-      `Hello, “guys”!`
+      `Hello, “guys”.`
     )
   );
 
