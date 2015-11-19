@@ -4,6 +4,7 @@
   "description": "Mdast plugin that fix your bad typography habits",
   "main": "index.es5.js",
   "scripts": {
+    "watch": "npm run transpile -- --watch",
     "coverage": "isparta cover _mocha index.js -- --require babel-core/register",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls < coverage/lcov.info",
