@@ -1,6 +1,6 @@
 {
   "name": "mdast-typographer",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Mdast plugin to make your typography better.",
   "main": "index.es5.js",
   "scripts": {
