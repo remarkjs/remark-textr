@@ -1,6 +1,6 @@
 import { equal } from 'assert';
 import mdast from 'mdast';
-import typographer from '.';
+import typographer from './';
 
 const t = (text, options) =>
   mdast().use(typographer, options).process(text).trim();
