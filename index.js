@@ -11,9 +11,12 @@ export default function attacher(
     after = []
   } = {}
 ) {
-  const tfs = Object.keys(TRANSFORMERS)
-    .filter(item => modules[item] !== false && true)
-    .map(item => require(TRANSFORMERS[item]));
+  const tfs =
+    modules === false
+    ? []
+    : Object.keys(TRANSFORMERS)
+        .filter(item => modules[item] !== false && true)
+        .map(item => require(TRANSFORMERS[item]));
 
   return function transformer(ast) {
     visit(ast, 'text', node => {

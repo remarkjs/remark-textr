@@ -82,6 +82,14 @@ As default, mdast-typographer uses these transformers:
 * **`spaces` — [typographic-single-spaces](spaces)** — replace many spaces to one space.
 * **`trademark` — [typographic-trademark](trademark)** — replaces alphabetic trademark to real symbol.
 
+If you don't wanna transform anything, you can disable all modules like so:
+
+```
+{
+  modules: false
+}
+```
+
 ##### options.locale
 
 Type: `String`  

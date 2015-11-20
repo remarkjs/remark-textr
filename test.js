@@ -34,6 +34,15 @@ describe('mdast-typographer', () => {
     )
   );
 
+  it('should remove all transformers', () =>
+    equal(
+      t(`Ellipses... and "quotes"`, {
+        modules: false
+      }),
+      `Ellipses... and "quotes"`
+    )
+  );
+
   it('should load locale', () =>
     equal(t(`"quotes"`, { locale: 'uk' }), `«quotes»`)
   );
