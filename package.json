@@ -5,7 +5,7 @@
   "main": "index.es5.js",
   "scripts": {
     "watch": "npm run transpile -- --watch",
-    "coverage": "isparta cover _mocha index.js -- --require babel-core/register",
+    "coverage": "babel-node ./node_modules/.bin/isparta cover _mocha index.js -- --require babel-core/register",
     "precoveralls": "npm run coverage",
     "coveralls": "coveralls < coverage/lcov.info",
     "lint": "eslint index.js test.js",

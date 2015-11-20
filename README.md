@@ -2,7 +2,7 @@
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
-<!-- [![Coveralls Status][coveralls-image]][coveralls-url] -->
+[![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
 > Mdast plugin to [make your typography better][typewriter-habits].
@@ -131,8 +131,8 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 [travis-url]: https://travis-ci.org/denysdovhan/mdast-typographer
 [travis-image]: https://img.shields.io/travis/denysdovhan/mdast-typographer.svg?style=flat-square
 
-<!-- [coveralls-url]: https://coveralls.io/r/denysdovhan/mdast-typographer -->
-<!-- [coveralls-image]: https://img.shields.io/coveralls/denysdovhan/mdast-typographer.svg?style=flat-square -->
+[coveralls-url]: https://coveralls.io/r/denysdovhan/mdast-typographer
+[coveralls-image]: https://img.shields.io/coveralls/denysdovhan/mdast-typographer.svg?style=flat-square
 
 [depstat-url]: https://david-dm.org/denysdovhan/mdast-typographer
 [depstat-image]: https://david-dm.org/denysdovhan/mdast-typographer.svg?style=flat-square
