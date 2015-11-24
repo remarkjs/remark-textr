@@ -78,9 +78,9 @@ As default, mdast-typographer uses these transformers:
 * **`em` — [typographic-em-dashes][em]** — replaces `--` to em dash.
 * **`en` — [typographic-en-dashes][en]** — safely replacing hyphens in a range of values with en dashes only.
 * **`math` — [typographic-math-symbols][math]** — replaces alphabetic math symbols to real symbols.
-* **`registered` — [typographic-registered-trademark](registered)** — replaces alphabetic registered trademark to real symbol.
-* **`spaces` — [typographic-single-spaces](spaces)** — replace many spaces to one space.
-* **`trademark` — [typographic-trademark](trademark)** — replaces alphabetic trademark to real symbol.
+* **`registered` — [typographic-registered-trademark][registered]** — replaces alphabetic registered trademark to real symbol.
+* **`spaces` — [typographic-single-spaces][spaces]** — replace many spaces to one space.
+* **`trademark` — [typographic-trademark][trademark]** — replaces alphabetic trademark to real symbol.
 
 If you don't wanna transform anything, you can disable all modules like so:
 
