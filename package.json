@@ -51,7 +51,8 @@
     "mdast": "^2.1.0",
     "mocha": "*",
     "npm-run-all": "*",
-    "rimraf": "*"
+    "rimraf": "*",
+    "typographic-base": "^1.0.1"
   },
   "dependencies": {
     "textr": "^0.3.0",
