@@ -1,7 +1,7 @@
 {
-  "name": "mdast-typographer",
-  "version": "0.2.0",
-  "description": "Mdast plugin to make your typography better.",
+  "name": "mdast-textr",
+  "version": "1.0.0",
+  "description": "Mdast plugin for Textr — modular tool to make your typography better.",
   "main": "index.es5.js",
   "scripts": {
     "watch": "npm run transpile -- --watch",
@@ -29,7 +29,8 @@
     "text",
     "typography",
     "typographic",
-    "typo"
+    "typo",
+    "textr"
   ],
   "author": "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
   "license": "MIT",
