@@ -21,6 +21,15 @@ describe('mdast-textr', () => {
     )
   );
 
+  it('should require strings', () =>
+    equal(
+      t(`Hello, "world"...`, {
+        plugins: [ 'typographic-ellipses' ]
+      }),
+      `Hello, "world"…`
+    )
+  );
+
   it('should load options', () =>
     equal(
       t(`"quotes"`, {

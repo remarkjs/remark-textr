@@ -6,7 +6,9 @@ export default function attacher(
 ) {
   return function transformer(ast) {
     visit(ast, 'text', node => {
-      node.value = (textr(options).use(...plugins))(node.value);
+      node.value = (textr(options).use(
+        ...plugins.map(p => typeof p === 'string' ? require(p) : p)
+      ))(node.value);
     });
   };
 }
