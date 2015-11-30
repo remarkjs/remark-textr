@@ -5,7 +5,7 @@
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Mdast plugin for [Textr][textr] — modular tool to [make your typography better][typewriter-habits].
+> [Mdast][mdast] plugin for [Textr][textr] — modular tool to [make your typography better][typewriter-habits].
 
 This plugin will help you to transform only _text_ nodes from your markdown using any functions that get text, transform it and return result of processing. For example, check out [typographic-*][tfs] functions. All of those functions are being composed using [Textr][textr].
 
@@ -80,7 +80,9 @@ Also, you have ability to define options using [`.mdastrc` or `package.json`][md
   "plugins": {
     "textr": {
       "plugins": ["typographic-base"],
-      "locale": "en-us"
+      "options": {
+        "locale": "en-us"
+      }
     }
   }
 }
