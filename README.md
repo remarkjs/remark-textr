@@ -27,37 +27,45 @@ You can use it as a plugin for [mdast][mdast]:
 
 ```js
 import mdast from 'mdast';
-import mdtextr from 'mdast-textr';
+import mdastTextr from 'mdast-textr';
 import base from 'typograhic-base';
 
 mdast
-  .use(mdtextr, {
+  .use(mdastTextr, {
     plugins: [ base ],
-    locale: 'en-us'
+    options: { locale: 'en-us' }
   })
   .process(`Hello -> "world"`); // Hello → “world”
 ```
 
 ## API
 
-### [mdast][mdast].[use][use](typo[, options])
+### [mdast][mdast].[use][use](mdastTextr[, mdastOptions])
 
 Transforms only text nodes defined in `options.plugins`.
 
-#### options
+#### mdastOptions
 
-Type: `Object`
+Type: `Object`  
+Default: `{}`
 
-Any option was set in `options`, except `plugins` field, will be passed into [Textr][textr] as it's options.
+Optionst that will be passed to plugin. Specified by [mdast documentation][mdast-use].
 
-For example, you may want to set your [ISO 639][iso] locale code. It's important for right correction, basically for proper primary and secondary quotes.
-
-##### options.plugins
+##### mdastOptions.plugins
 
 Type: `Array`  
 Default: `[]`
 
 Array of functions that will be executed. Besides, you can pass strings of package's names and they will be required.
+
+##### mdastOptions.options
+
+Type: `Object`  
+Default: `{}`
+
+Any option was set in `options` will be passed into [Textr][textr] as it's options.
+
+For example, you may want to set your [ISO 639][iso] locale code. It's important for right correction, basically for proper primary and secondary quotes.
 
 ## CLI
 
@@ -78,8 +86,6 @@ Also, you have ability to define options using [`.mdastrc` or `package.json`][md
 }
 ```
 
-[mdastrc]: https://github.com/wooorm/mdast/blob/master/doc/mdastrc.5.md
-
 ## License
 
 MIT © [Denys Dovhan](http://denysdovhan.com)
@@ -88,19 +94,8 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 [use]: https://github.com/wooorm/mdast#mdastuseplugin-options
 [iso]: http://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
-[apostrophes]: https://github.com/iamstarkov/typographic-apostrophes
-[quotes]: https://github.com/iamstarkov/typographic-quotes
-[plurals]: https://github.com/iamstarkov/typographic-apostrophes-for-possessive-plurals
-[arrows]: https://github.com/andrepolischuk/typographic-arrows
-[copyright]: https://github.com/iamstarkov/typographic-copyright
-[currency]: https://github.com/talgautb/typographic-currency
-[ellipses]: https://github.com/iamstarkov/typographic-ellipses
-[em]: https://github.com/iamstarkov/typographic-em-dashes
-[en]: https://github.com/iamstarkov/typographic-en-dashes
-[math]: https://github.com/iamstarkov/typographic-math-symbols
-[registered]: https://github.com/iamstarkov/typographic-registered-trademark
-[spaces]: https://github.com/iamstarkov/typographic-single-spaces
-[trademark]: https://www.npmjs.com/package/typographic-trademark
+[mdastrc]: https://github.com/wooorm/mdast/blob/master/doc/mdastrc.5.md
+[mdast-use]: https://github.com/wooorm/mdast/blob/master/doc/mdast.3.md#mdastuseplugin-options
 
 [npm-url]: https://npmjs.org/package/mdast-textr
 [npm-image]: https://img.shields.io/npm/v/mdast-textr.svg?style=flat-square
