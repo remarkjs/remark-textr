@@ -1,10 +1,13 @@
 import { equal } from 'assert';
 import mdast from 'mdast';
+import mdastTextr from './index';
 import base from 'typographic-base';
-import typographer from './index';
 
-const t = (text, options) =>
-  mdast().use(typographer, options).process(text).trim();
+const t = (text, mdastOptions) =>
+  mdast()
+    .use(mdastTextr, mdastOptions)
+    .process(text)
+    .trim();
 
 describe('mdast-textr', () => {
 
@@ -33,8 +36,8 @@ describe('mdast-textr', () => {
   it('should load options', () =>
     equal(
       t(`"quotes"`, {
-        locale: 'uk',
-        plugins: [ base ]
+        plugins: [ base ],
+        options: { locale: 'uk' }
       }),
       `«quotes»`
     )
