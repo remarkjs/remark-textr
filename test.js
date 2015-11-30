@@ -1,77 +1,45 @@
 import { equal } from 'assert';
 import mdast from 'mdast';
-import typographer from './';
+import mdastTextr from './index';
+import base from 'typographic-base';
 
-const t = (text, options) =>
-  mdast().use(typographer, options).process(text).trim();
+const t = (text, mdastOptions) =>
+  mdast()
+    .use(mdastTextr, mdastOptions)
+    .process(text)
+    .trim();
 
-describe('mdast-typographer', () => {
+describe('mdast-textr', () => {
 
-  it('should transform', () => {
-    equal(t(`rock'n'rol`), `rock’n’rol`, 'apostrophes');
-    equal(t(`sisters' friends'`), `sisters’ friends’`, 'plurals');
-    equal(t(`-> <-`), `→ ←`, 'arrows');
-    equal(t(`(c)`), `©`, 'copyright');
-    equal(t(`1USD = 23,7UAH`), `1$ = 23,7₴`, 'currency');
-    equal(t(`... ... ...`), `… … …`, 'currency');
-    equal(t(`foo -- bar`), `foo — bar`, 'em-dashes');
-    equal(t(`(1967-1994)`), `(1967–1994)`, 'en-dashes');
-    equal(t(`10 -+ 1`), `10 ∓ 1`, 'math');
-    equal(t(`"quotes"`), `“quotes”`, 'quotes');
-    equal(t(`(R)`), `®`, 'registered');
-    equal(t(`foo    bar`), `foo bar`, 'spaces');
-    equal(t(`(TM)`), `™`, 'trademark');
-  });
+  it('should return original text', () =>
+    equal(t(`Hello, "world"...`), `Hello, "world"...`)
+  );
 
-  it('should remove disabled transformers', () =>
+  it('should return transformed text', () =>
     equal(
-      t(`Ellipses... and "quotes"`, {
-        modules: {
-          ellipses: false
-        }
+      t(`Hello, "world"...`, {
+        plugins: [ base ]
       }),
-      `Ellipses... and “quotes”`
+      `Hello, “world”…`
     )
   );
 
-  it('should remove all transformers', () =>
+  it('should require strings', () =>
     equal(
-      t(`Ellipses... and "quotes"`, {
-        modules: false
+      t(`Hello, "world"...`, {
+        plugins: [ 'typographic-ellipses' ]
       }),
-      `Ellipses... and "quotes"`
+      `Hello, "world"…`
     )
   );
 
-  it('should load locale', () =>
-    equal(t(`"quotes"`, { locale: 'uk' }), `«quotes»`)
-  );
-
-  it('should use after transformers', () =>
+  it('should load options', () =>
     equal(
-      t(`Hello, "world".`, {
-        after: [(t) => t.replace('world', 'guys')]
+      t(`"quotes"`, {
+        plugins: [ base ],
+        options: { locale: 'uk' }
       }),
-      `Hello, “guys”.`
-    )
-  );
-
-  it('should use before transformers', () =>
-    equal(
-      t(`Hello, "world"!`, {
-        before: [(t) => t.replace(/"/g, '')]
-      }),
-      `Hello, world!`
-    )
-  );
-
-  it('should use after and before transformers', () =>
-    equal(
-      t(`Hello, "world"!`, {
-        before: [(t) => t.replace(/"/g, '')],
-        after: [(t) => t.replace('world', 'guys')]
-      }),
-      `Hello, guys!`
+      `«quotes»`
     )
   );
 

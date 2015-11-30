@@ -1,13 +1,13 @@
-# mdast-typographer
+# mdast-textr
 
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]][travis-url]
 [![Coveralls Status][coveralls-image]][coveralls-url]
 [![Dependency Status][depstat-image]][depstat-url]
 
-> Mdast plugin to [make your typography better][typewriter-habits].
+> [Mdast][mdast] plugin for [Textr][textr] — modular tool to [make your typography better][typewriter-habits].
 
-This plugin transforms only _text_ nodes from your markdown using [`typographic-*`][tfs] transformers. All of those transformers are being composed using [Textr][textr]. By the way, you can add your own transformers or disable default ones.
+This plugin will help you to transform only _text_ nodes from your markdown using any functions that get text, transform it and return result of processing. For example, check out [typographic-*][tfs] functions. All of those functions are being composed using [Textr][textr].
 
 [typewriter-habits]: http://practicaltypography.com/typewriter-habits.html
 [tfs]: https://github.com/denysdovhan/mdast-typographer/blob/master/package.json#L53-L65
@@ -15,7 +15,7 @@ This plugin transforms only _text_ nodes from your markdown using [`typographic-
 
 ## Install
 
-Install mdast-typographer using [npm][npm]:
+Install **mdast-textr** using [npm][npm]:
 
     npm install --save mdast-typographer
 
@@ -27,89 +27,66 @@ You can use it as a plugin for [mdast][mdast]:
 
 ```js
 import mdast from 'mdast';
-import typo from 'mdast-typographer';
+import mdastTextr from 'mdast-textr';
+import base from 'typographic-base';
 
-// Use this plugin as usual:
-mdast.use(typo).process(`Hello -> "world"`); // Hello → “world”
-
-// … or with options
-mdast.use(typo, {
-  locale: 'ru',
-  before: [
-    (t) => t.replace('world', 'guys')
-  ],
-  modules: {
-    arrows: false
-  },
-  after: [
-    (t) => t.replace('Hello', 'Goodbye')
-  ]
-}).process(`Hello -> "world"`); // Goodbye -> «guys»
+mdast
+  .use(mdastTextr, {
+    plugins: [ base ],
+    options: { locale: 'en-us' }
+  })
+  .process(`Hello -> "world"`); // Hello → “world”
 ```
 
 ## API
 
-### [mdast][mdast].[use][use](typo[, options])
+### [mdast][mdast].[use][use](mdastTextr[, mdastOptions])
 
-Transforms only text nodes and fixes your typography.
+Transforms only text nodes defined in `options.plugins`.
 
-#### options
+#### mdastOptions
 
-Type: `Object`
-
-Options will be passed into plugin.
-
-##### options.modules
-
-Type: `Object`
+Type: `Object`  
 Default: `{}`
 
-`modules` object contains pairs of transformers and boolean value. If value equals `false`, then this transformer won't be executed. If value equals `true`, that transformer will be used as usual.
+Optionst that will be passed to plugin. Specified by [mdast documentation][mdast-use].
 
-As default, mdast-typographer uses these transformers:
+##### mdastOptions.plugins
 
-* **`apostrophes` — [typographic-apostrophes][apostrophes]** — typographic apostrophes in contractions and for possessive case.
-* **`quotes` — [typographic-quotes][quotes]** —  typographic quotes for your text with respect to locale.
-* **`plurals` — [typographic-apostrophes-for-possessive-plurals][plurals]** — typographic apostrophes for progressive plurals.
-* **`arrows` — [typographic-arrows][arrows]** — typographic real arrows.
-* **`copyright` — [typographic-copyright][copyright]** — typographic copyright.
-* **`currency` — [typographic-currency][currency]** — replaces name of currency
-* **`ellipses` — [typographic-ellipses][ellipses]** — avoids using periods and
-* **`em` — [typographic-em-dashes][em]** — replaces `--` to em dash.
-* **`en` — [typographic-en-dashes][en]** — safely replacing hyphens in a range of values with en dashes only.
-* **`math` — [typographic-math-symbols][math]** — replaces alphabetic math symbols to real symbols.
-* **`registered` — [typographic-registered-trademark][registered]** — replaces alphabetic registered trademark to real symbol.
-* **`spaces` — [typographic-single-spaces][spaces]** — replace many spaces to one space.
-* **`trademark` — [typographic-trademark][trademark]** — replaces alphabetic trademark to real symbol.
+Type: `Array`  
+Default: `[]`
 
-If you don't wanna transform anything, you can disable all modules like so:
+Array of functions that will be executed. Besides, you can pass strings of package's names and they will be required.
 
-```
+##### mdastOptions.options
+
+Type: `Object`  
+Default: `{}`
+
+Any option was set in `options` will be passed into [Textr][textr] as it's options.
+
+For example, you may want to set your [ISO 639][iso] locale code. It's important for right correction, basically for proper primary and secondary quotes.
+
+## CLI
+
+You can easy use this plugin from CLI like so:
+
+    mdast --use 'textr=plugins:["typographic-base"]' example.md
+
+Also, you have ability to define options using [`.mdastrc` or `package.json`][mdastrc]. An example `.mdastrc` could look like this:
+
+```json
 {
-  modules: false
+  "plugins": {
+    "textr": {
+      "plugins": ["typographic-base"],
+      "options": {
+        "locale": "en-us"
+      }
+    }
+  }
 }
 ```
-
-##### options.locale
-
-Type: `String`  
-Default: `en-us`
-
-[ISO 639][iso] locale code. It's important for right correction, basically for proper primary and secondary quotes.
-
-##### options.before
-
-Type: `Array`  
-Default: `[]`
-
-Array of custom transformers that will be executed _before_ another.
-
-##### options.after
-
-Type: `Array`  
-Default: `[]`
-
-Array of custom transformers that will be executed _after_ another.
 
 ## License
 
@@ -119,28 +96,17 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 [use]: https://github.com/wooorm/mdast#mdastuseplugin-options
 [iso]: http://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
-[apostrophes]: https://github.com/iamstarkov/typographic-apostrophes
-[quotes]: https://github.com/iamstarkov/typographic-quotes
-[plurals]: https://github.com/iamstarkov/typographic-apostrophes-for-possessive-plurals
-[arrows]: https://github.com/andrepolischuk/typographic-arrows
-[copyright]: https://github.com/iamstarkov/typographic-copyright
-[currency]: https://github.com/talgautb/typographic-currency
-[ellipses]: https://github.com/iamstarkov/typographic-ellipses
-[em]: https://github.com/iamstarkov/typographic-em-dashes
-[en]: https://github.com/iamstarkov/typographic-en-dashes
-[math]: https://github.com/iamstarkov/typographic-math-symbols
-[registered]: https://github.com/iamstarkov/typographic-registered-trademark
-[spaces]: https://github.com/iamstarkov/typographic-single-spaces
-[trademark]: https://www.npmjs.com/package/typographic-trademark
+[mdastrc]: https://github.com/wooorm/mdast/blob/master/doc/mdastrc.5.md
+[mdast-use]: https://github.com/wooorm/mdast/blob/master/doc/mdast.3.md#mdastuseplugin-options
 
-[npm-url]: https://npmjs.org/package/mdast-typographer
-[npm-image]: https://img.shields.io/npm/v/mdast-typographer.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/mdast-textr
+[npm-image]: https://img.shields.io/npm/v/mdast-textr.svg?style=flat-square
 
-[travis-url]: https://travis-ci.org/denysdovhan/mdast-typographer
-[travis-image]: https://img.shields.io/travis/denysdovhan/mdast-typographer.svg?style=flat-square
+[travis-url]: https://travis-ci.org/denysdovhan/mdast-textr
+[travis-image]: https://img.shields.io/travis/denysdovhan/mdast-textr.svg?style=flat-square
 
-[coveralls-url]: https://coveralls.io/r/denysdovhan/mdast-typographer
-[coveralls-image]: https://img.shields.io/coveralls/denysdovhan/mdast-typographer.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/denysdovhan/mdast-textr
+[coveralls-image]: https://img.shields.io/coveralls/denysdovhan/mdast-textr.svg?style=flat-square
 
-[depstat-url]: https://david-dm.org/denysdovhan/mdast-typographer
-[depstat-image]: https://david-dm.org/denysdovhan/mdast-typographer.svg?style=flat-square
+[depstat-url]: https://david-dm.org/denysdovhan/mdast-textr
+[depstat-image]: https://david-dm.org/denysdovhan/mdast-textr.svg?style=flat-square
