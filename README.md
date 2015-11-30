@@ -28,7 +28,7 @@ You can use it as a plugin for [mdast][mdast]:
 ```js
 import mdast from 'mdast';
 import mdastTextr from 'mdast-textr';
-import base from 'typograhic-base';
+import base from 'typographic-base';
 
 mdast
   .use(mdastTextr, {
