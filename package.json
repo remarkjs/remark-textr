@@ -12,7 +12,7 @@
     "test": "mocha --require babel-core/register",
     "tdd": "npm test -- --watch",
     "transpile": "babel index.js --out-file index.es5.js",
-    "prepublish": "npm run transpile",
+    "prepublish": "npm-run-all transpile test",
     "clean": "rimraf index.es5.js",
     "push": "git push --follow-tags",
     "postpublish": "npm-run-all clean push"
