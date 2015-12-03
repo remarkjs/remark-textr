@@ -1,6 +1,6 @@
 {
   "name": "mdast-textr",
-  "version": "1.0.0-rc3",
+  "version": "1.0.0",
   "description": "Mdast plugin for Textr — modular tool to make your typography better.",
   "main": "index.es5.js",
   "scripts": {
