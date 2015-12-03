@@ -1,46 +1,27 @@
 import { equal } from 'assert';
 import mdast from 'mdast';
 import mdastTextr from './index';
-import base from 'typographic-base';
 
-const t = (text, mdastOptions) =>
-  mdast()
-    .use(mdastTextr, mdastOptions)
-    .process(text)
-    .trim();
+// textr plugin — just function to replace triple dots to ellipses
+const ellipses = input => input.replace(/\.{3}/gim, '…');
 
-describe('mdast-textr', () => {
+const text = `
+## spread operator...
 
-  it('should return original text', () =>
-    equal(t(`Hello, "world"...`), `Hello, "world"...`)
-  );
+    function(...args) { return args; }
+`;
 
-  it('should return transformed text', () =>
-    equal(
-      t(`Hello, "world"...`, {
-        plugins: [ base ]
-      }),
-      `Hello, “world”…`
-    )
-  );
+it('should mdastTextr in node', () =>
+  equal(
+    mdast.use(mdastTextr, { plugins: [ ellipses ] }).process(text),
+`## spread operator…
 
-  it('should require strings', () =>
-    equal(
-      t(`Hello, "world"...`, {
-        plugins: [ 'typographic-ellipses' ]
-      }),
-      `Hello, "world"…`
-    )
-  );
+    function(...args) { return args; }
+`));
 
-  it('should load options', () =>
-    equal(
-      t(`"quotes"`, {
-        plugins: [ base ],
-        options: { locale: 'uk' }
-      }),
-      `«quotes»`
-    )
-  );
-
-});
+it('should mdastTextr in CLI (with options)', () =>
+  equal(mdast.use(mdastTextr, {
+    plugins: [ 'typographic-ellipses', 'typographic-quotes' ],
+    options: { locale: 'ru' }
+  }).process('yo "there" ...\n'), 'yo «there» …\n')
+);
