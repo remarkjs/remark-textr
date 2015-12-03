@@ -52,8 +52,8 @@
     "mocha": "*",
     "npm-run-all": "*",
     "rimraf": "*",
-    "typographic-base": "^1.0.1",
-    "typographic-ellipses": "^1.0.11"
+    "typographic-ellipses": "^1.0.11",
+    "typographic-quotes": "^1.2.1"
   },
   "dependencies": {
     "textr": "^0.3.0",
