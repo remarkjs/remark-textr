@@ -1,6 +1,6 @@
 import { equal } from 'assert';
-import mdast from 'mdast';
-import mdastTextr from './index';
+import remark from 'remark';
+import remarkTextr from './index';
 
 // textr plugin — just function to replace triple dots to ellipses
 const ellipses = input => input.replace(/\.{3}/gim, '…');
@@ -11,16 +11,16 @@ const text = `
     function(...args) { return args; }
 `;
 
-it('should mdastTextr in node', () =>
+it('should remarkTextr in node', () =>
   equal(
-    mdast.use(mdastTextr, { plugins: [ ellipses ] }).process(text),
+    remark.use(remarkTextr, { plugins: [ ellipses ] }).process(text),
 `## spread operator…
 
     function(...args) { return args; }
 `));
 
-it('should mdastTextr in CLI (with options)', () =>
-  equal(mdast.use(mdastTextr, {
+it('should remarkTextr in CLI (with options)', () =>
+  equal(remark.use(remarkTextr, {
     plugins: [ 'typographic-ellipses', 'typographic-quotes' ],
     options: { locale: 'ru' }
   }).process('yo "there" ...\n'), 'yo «there» …\n')
