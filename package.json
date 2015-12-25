@@ -1,7 +1,7 @@
 {
-  "name": "remark-textr",
-  "version": "2.0.0",
-  "description": "Remark plugin for Textr — modular tool to make your typography better.",
+  "name": "mdast-textr",
+  "version": "1.0.0",
+  "description": "Mdast plugin for Textr — modular tool to make your typography better.",
   "main": "index.es5.js",
   "scripts": {
     "watch": "npm run transpile -- --watch",
@@ -19,11 +19,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/denysdovhan/remark-textr.git"
+    "url": "git+https://github.com/denysdovhan/mdast-typographer.git"
   },
   "keywords": [
     "mdast",
-    "remark",
     "plugin",
     "markdown",
     "md",
@@ -36,9 +35,9 @@
   "author": "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/denysdovhan/remark-textr/issues"
+    "url": "https://github.com/denysdovhan/mdast-typographer/issues"
   },
-  "homepage": "https://github.com/denysdovhan/remark-textr#readme",
+  "homepage": "https://github.com/denysdovhan/mdast-typographer#readme",
   "devDependencies": {
     "assert": "*",
     "babel-cli": "^6.1.18",
@@ -49,7 +48,7 @@
     "coveralls": "*",
     "eslint": "^1.9.0",
     "isparta": "*",
-    "remark": "^3.0.0",
+    "mdast": "^2.1.0",
     "mocha": "*",
     "npm-run-all": "*",
     "rimraf": "*",
