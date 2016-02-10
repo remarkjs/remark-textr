@@ -15,7 +15,7 @@ Process your markdown with [Textr][textr] plugins, **skipping code**.
 * [CLI](#cli)
 
 [typewriter-habits]: http://practicaltypography.com/typewriter-habits.html
-[textr]: https://github.com/shuvalov-anton/textr
+[textr]: https://github.com/A/textr
 
 ## Install
 
@@ -53,7 +53,7 @@ Default: `{}`
 
 Contain `plugins` and `options` which are Textr’s options. Check out [Textr usage section][textr-usage].
 
-[textr-usage]: https://github.com/shuvalov-anton/textr#usage
+[textr-usage]: https://github.com/A/textr#usage
 
 ##### remarkOptions.plugins
 
@@ -107,7 +107,7 @@ MIT © [Denys Dovhan](http://denysdovhan.com)
 
 [remark]: https://github.com/wooorm/remark
 [use]: https://github.com/wooorm/remark#remarkuseplugin-options
-[locale]: https://github.com/shuvalov-anton/textr#locale-option-consistence
+[locale]: https://github.com/A/textr#locale-option-consistence
 [iso]: http://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
 [remarkrc]: https://github.com/wooorm/remark/blob/master/doc/remarkrc.5.md
