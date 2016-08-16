@@ -13,14 +13,14 @@ const text = `
 
 it('should remarkTextr in node', () =>
   equal(
-    remark.use(remarkTextr, { plugins: [ ellipses ] }).process(text),
+    remark().use(remarkTextr, { plugins: [ ellipses ] }).process(text),
 `## spread operator…
 
     function(...args) { return args; }
 `));
 
 it('should remarkTextr in CLI (with options)', () =>
-  equal(remark.use(remarkTextr, {
+  equal(remark().use(remarkTextr, {
     plugins: [ 'typographic-ellipses', 'typographic-quotes' ],
     options: { locale: 'ru' }
   }).process('yo "there" ...\n'), 'yo «there» …\n')
