@@ -49,7 +49,7 @@
     "coveralls": "*",
     "eslint": "^3.3.0",
     "isparta": "*",
-    "remark": "^5.1.0",
+    "remark": "^6.0.1",
     "mocha": "*",
     "npm-run-all": "*",
     "rimraf": "*",
