@@ -51,7 +51,7 @@
     "isparta": "*",
     "remark": "^6.0.1",
     "mocha": "*",
-    "npm-run-all": "4.0.1",
+    "npm-run-all": "4.0.2",
     "rimraf": "*",
     "typographic-ellipses": "^1.0.11",
     "typographic-quotes": "^2.0.1"
