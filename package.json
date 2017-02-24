@@ -1,6 +1,6 @@
 {
   "name": "remark-textr",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Remark plugin for Textr — modular tool to make your typography better.",
   "main": "index.es5.js",
   "scripts": {
