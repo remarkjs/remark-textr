@@ -2,7 +2,7 @@ import visit from 'unist-util-visit';
 import textr from 'textr';
 
 export default function attacher(
-  processor, { plugins = [], options = {} } = {}
+  { plugins = [], options = {} } = {}
 ) {
   return function transformer(ast) {
     visit(ast, 'text', node => {
