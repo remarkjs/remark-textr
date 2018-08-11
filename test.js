@@ -1,11 +1,13 @@
-var equal = require('assert').equal;
-var remark = require('remark');
-var typographicQuotes = require('typographic-quotes');
-var textr = require('.');
+/* eslint-env mocha */
 
-// textr plugin — just function to replace triple dots to ellipses
+var equal = require('assert').strictEqual
+var remark = require('remark')
+var typographicQuotes = require('typographic-quotes')
+var textr = require('.')
+
+// Textr plugin — just function to replace triple dots to ellipses
 function ellipses(input) {
-  return input.replace(/\.{3}/gim, '…');
+  return input.replace(/\.{3}/gim, '…')
 }
 
 it('should work without arguments', function() {
@@ -15,8 +17,8 @@ it('should work without arguments', function() {
       .processSync('## spread operator...\n')
       .toString(),
     '## spread operator...\n'
-  );
-});
+  )
+})
 
 it('should work without plugins', function() {
   equal(
@@ -25,8 +27,8 @@ it('should work without plugins', function() {
       .processSync('## spread operator...\n')
       .toString(),
     '## spread operator...\n'
-  );
-});
+  )
+})
 
 it('should run textr on a node', function() {
   equal(
@@ -47,8 +49,8 @@ it('should run textr on a node', function() {
       '    function(...args) { return args; }',
       ''
     ].join('\n')
-  );
-});
+  )
+})
 
 it('should support options', function() {
   equal(
@@ -60,5 +62,5 @@ it('should support options', function() {
       .processSync('yo "there" ...\n')
       .toString(),
     'yo «there» …\n'
-  );
-});
+  )
+})
