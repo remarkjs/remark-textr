@@ -1,42 +1,64 @@
-import { equal } from 'assert';
-import remark from 'remark';
-import remarkTextr from '.';
+var equal = require('assert').equal;
+var remark = require('remark');
+var typographicQuotes = require('typographic-quotes');
+var textr = require('.');
 
 // textr plugin — just function to replace triple dots to ellipses
-const ellipses = input => input.replace(/\.{3}/gim, '…');
+function ellipses(input) {
+  return input.replace(/\.{3}/gim, '…');
+}
 
-it('should remarkTextr in node', () => {
-  const fixture = `
-## spread operator...
-
-    function(...args) { return args; }
-`;
-
-  const expected = `
-## spread operator…
-
-    function(...args) { return args; }
-`;
-
-  const actual = remark()
-    .use(remarkTextr, { plugins: [ ellipses ] })
-    .processSync(fixture)
-    .toString();
-
-  equal(actual.trim(), expected.trim());
+it('should work without arguments', function() {
+  equal(
+    remark()
+      .use(textr)
+      .processSync('## spread operator...\n')
+      .toString(),
+    '## spread operator...\n'
+  );
 });
 
-it('should remarkTextr in CLI (with options)', () => {
-  const fixture = 'yo "there" ...\n';
-  const expected = 'yo «there» …\n';
+it('should work without plugins', function() {
+  equal(
+    remark()
+      .use(textr, {options: {locale: 'ru'}})
+      .processSync('## spread operator...\n')
+      .toString(),
+    '## spread operator...\n'
+  );
+});
 
-  const actual = remark()
-    .use(remarkTextr, {
-      plugins: [ 'typographic-ellipses', 'typographic-quotes' ],
-      options: { locale: 'ru' }
-    })
-    .processSync(fixture)
-    .toString();
+it('should run textr on a node', function() {
+  equal(
+    remark()
+      .use(textr, {plugins: [ellipses]})
+      .processSync(
+        [
+          '## spread operator...',
+          '',
+          '    function(...args) { return args; }',
+          ''
+        ].join('\n')
+      )
+      .toString(),
+    [
+      '## spread operator…',
+      '',
+      '    function(...args) { return args; }',
+      ''
+    ].join('\n')
+  );
+});
 
-  equal(actual.trim(), expected.trim());
+it('should support options', function() {
+  equal(
+    remark()
+      .use(textr, {
+        plugins: ['typographic-ellipses', typographicQuotes],
+        options: {locale: 'ru'}
+      })
+      .processSync('yo "there" ...\n')
+      .toString(),
+    'yo «there» …\n'
+  );
 });
