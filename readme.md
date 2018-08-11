@@ -1,126 +1,119 @@
-# remark-textr
+# remark-textr [![Build Status][build-badge]][build-status] [![Coverage Status][coverage-badge]][coverage-status] [![Chat][chat-badge]][chat]
 
-[![NPM version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Coveralls Status][coveralls-image]][coveralls-url]
-[![Dependency Status][depstat-image]][depstat-url]
+[Make your typography better][typewriter-habits] with [**remark**][remark] and
+[**Textr**][textr] (skipping code).
 
-> [Remark][remark] plugin for [Textr][textr] — modular tool to [make your typography better][typewriter-habits].
+## Installation
 
-Process your markdown with [Textr][textr] plugins, **skipping code**.
+[npm][]:
 
-* [Install](#install)
-* [Usage](#usage)
-* [API](#api)
-* [CLI](#cli)
-
-[typewriter-habits]: http://practicaltypography.com/typewriter-habits.html
-[textr]: https://github.com/A/textr
-
-## Install
-
-    npm install --save remark-textr
+```bash
+npm install remark-textr
+```
 
 ## Usage
 
-```js
-import remark from 'remark';
-import remarkTextr from 'remark-textr';
+Say we have the following file, `example.md`:
 
-// textr plugin — just function to replace triple dots to ellipses
-const ellipses = input => input.replace(/\.{3}/gim, '…');
-
-const text = `
+````markdown
 ## spread operator...
 
-    function(...args) { return args; }
-`.trim();
+```js
+function(...args) { return args; }
+```
+````
 
-remark.use(remarkTextr, { plugins: [ ellipses ] }).process(text);/*
+And our script, `example.js`, looks as follows:
+
+```javascript
+var vfile = require('to-vfile')
+var remark = require('remark')
+var textr = require('remark-textr')
+
+// textr plugin — just function to replace triple dots to ellipses
+function ellipses(input) {
+  return input.replace(/\.{3}/gim, '…')
+}
+
+remark()
+  .use(textr, {plugins: [ellipses]})
+  .process(vfile.readSync('example.md'), function(err, file) {
+    if (err) throw err
+    console.log(String(file))
+  })
+```
+
+Yields:
+
+````markdown
 ## spread operator…
 
-    function(...args) { return args; } */
+```js
+function(...args) { return args; }
 ```
+````
 
 ## API
 
-### remark.use(remarkTextr[, remarkOptions])
+### `remark.use(textr[, config])`
 
-#### remarkOptions
+##### `config.plugins`
 
-Type: `Object`  
-Default: `{}`
+List of [Textr][] plugins (`Array.<string|Function>?`).
+They are available on npm, labelled with [textr][textr-plugins] keyword.
+Also you can easily create new one, as shown in the example above.
+If strings are passed in, those are required.
 
-Contain `plugins` and `options` which are Textr’s options. Check out [Textr usage section][textr-usage].
+##### `config.options`
 
-[textr-usage]: https://github.com/A/textr#usage
+Passed to [Textr][] as it’s options (`Object?`).
+For example, you may want to set your [ISO 639][iso] [locale code][locale].
+It’s important for stuff like the correct primary and secondary quotes.
 
-##### remarkOptions.plugins
+## Contribute
 
-Type: `Array`  
-Default: `[]`
+See [`contributing.md` in `remarkjs/remark`][contributing] for ways to get
+started.
 
-Array of [Textr][textr] plugins. They are available on npm, labelled with [textr][textr-plugins] keyword. Also you can easily create new one. Don’t be scared.
-
-[textr-plugins]: https://www.npmjs.com/browse/keyword/textr
-
-##### remarkOptions.options
-
-Type: `Object`  
-Default: `{}`
-
-Any option was set in `options` will be passed into [Textr][textr] as it's options.
-
-For example, you may want to set your [ISO 639][iso] [locale code][locale]. It's important for right correction, basically for proper primary and secondary quotes.
-
-## CLI
-
-`remark-textr` as remark plugin has no CLI itself, so you are gonna use remark CLI instead. So check the [remark-cli docs][remark-cli] first. `remark` and `remark-textr` both have to be installed. Also you have to define `textr` plugins as Array of Strings, but you are lucky and `remark-textr` will require them for you!
-
-[remark-cli]: https://github.com/wooorm/remark/#cli
-[t-base]: https://github.com/iamstarkov/typographic-base
-
-### inline
-
-    remark --use "textr=plugins:['typographic-base']" README.md --output README.md
-
-### config
-
-    remark README.md --output README.md
-
-With this `.remarkrc` config defined:
-
-```json
-{
-  "plugins": {
-    "textr": {
-      "plugins": [ "typographic-base"],
-      "options": { "locale": "en-us" }
-    }
-  }
-}
-```
+This organisation has a [Code of Conduct][coc].  By interacting with this
+repository, organisation, or community you agree to abide by its terms.
 
 ## License
 
-MIT © [Denys Dovhan](http://denysdovhan.com)
+[MIT][license] © [Denys Dovhan][author]
 
-[remark]: https://github.com/wooorm/remark
-[use]: https://github.com/wooorm/remark#remarkuseplugin-options
+<!-- Definitions -->
+
+[build-badge]: https://img.shields.io/travis/remarkjs/remark-textr.svg
+
+[build-status]: https://travis-ci.org/remarkjs/remark-textr
+
+[coverage-badge]: https://img.shields.io/codecov/c/github/remarkjs/remark-textr.svg
+
+[coverage-status]: https://codecov.io/github/remarkjs/remark-textr
+
+[chat-badge]: https://img.shields.io/gitter/room/remarkjs/Lobby.svg
+
+[chat]: https://gitter.im/remarkjs/Lobby
+
+[license]: license
+
+[author]: http://denysdovhan.com
+
+[npm]: https://docs.npmjs.com/cli/install
+
+[remark]: https://github.com/remarkjs/remark
+
+[contributing]: https://github.com/remarkjs/remark/blob/master/contributing.md
+
+[coc]: https://github.com/remarkjs/remark/blob/master/code-of-conduct.md
+
 [locale]: https://github.com/A/textr#locale-option-consistence
+
 [iso]: http://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
-[remarkrc]: https://github.com/wooorm/remark/blob/master/doc/remarkrc.5.md
-[remark-use]: https://github.com/wooorm/remark/blob/master/doc/remark.3.md#remarkuseplugin-options
+[typewriter-habits]: http://practicaltypography.com/typewriter-habits.html
 
-[npm-url]: https://npmjs.org/package/remark-textr
-[npm-image]: https://img.shields.io/npm/v/remark-textr.svg?style=flat-square
+[textr]: https://github.com/A/textr
 
-[travis-url]: https://travis-ci.org/denysdovhan/remark-textr
-[travis-image]: https://img.shields.io/travis/denysdovhan/remark-textr.svg?style=flat-square
-
-[coveralls-url]: https://coveralls.io/r/denysdovhan/remark-textr
-[coveralls-image]: https://img.shields.io/coveralls/denysdovhan/remark-textr.svg?style=flat-square
-
-[depstat-url]: https://david-dm.org/denysdovhan/remark-textr
-[depstat-image]: https://david-dm.org/denysdovhan/remark-textr.svg?style=flat-square
+[textr-plugins]: https://www.npmjs.com/browse/keyword/textr
