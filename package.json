@@ -15,8 +15,8 @@
     "typo",
     "textr"
   ],
-  "repository": "denysdovhan/remark-textr",
-  "bugs": "https://github.com/denysdovhan/remark-textr/issues",
+  "repository": "remarkjs/remark-textr",
+  "bugs": "https://github.com/remarkjs/remark-textr/issues",
   "author": "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
   "contributors": [
     "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
