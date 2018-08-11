@@ -2,22 +2,7 @@
   "name": "remark-textr",
   "version": "3.0.1",
   "description": "Remark plugin for Textr — modular tool to make your typography better.",
-  "main": "index.js",
-  "scripts": {
-    "coverage": "nyc --reporter lcov mocha test.js",
-    "precoveralls": "npm run coverage",
-    "coveralls": "coveralls < coverage/lcov.info",
-    "lint": "eslint index.js test.js",
-    "test": "mocha",
-    "tdd": "npm test -- --watch",
-    "prepublish": "npm run test",
-    "push": "git push --follow-tags",
-    "postpublish": "npm run push"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/denysdovhan/remark-textr.git"
-  },
+  "license": "MIT",
   "keywords": [
     "mdast",
     "remark",
@@ -30,12 +15,20 @@
     "typo",
     "textr"
   ],
+  "repository": "denysdovhan/remark-textr",
+  "bugs": "https://github.com/denysdovhan/remark-textr/issues",
   "author": "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/denysdovhan/remark-textr/issues"
+  "contributors": [
+    "Denys Dovhan <email@denysdovhan.com> (http://denysdovhan.com)",
+    "Titus Wormer <tituswormer@gmail.com> (http://wooorm.com)"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "dependencies": {
+    "textr": "^0.3.0",
+    "unist-util-visit": "^1.0.0"
   },
-  "homepage": "https://github.com/denysdovhan/remark-textr#readme",
   "devDependencies": {
     "coveralls": "*",
     "eslint": "^5.0.0",
@@ -46,9 +39,11 @@
     "typographic-ellipses": "^1.0.11",
     "typographic-quotes": "^2.0.1"
   },
-  "dependencies": {
-    "textr": "^0.3.0",
-    "unist-util-visit": "^1.0.0"
+  "scripts": {
+    "lint": "eslint index.js test.js",
+    "test-api": "mocha",
+    "test-coverage": "nyc --reporter lcov mocha test.js",
+    "test": "npm run lint && npm run test-coverage"
   },
   "nyc": {
     "check-coverage": true,
