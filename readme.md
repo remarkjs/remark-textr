@@ -98,7 +98,7 @@ repository, organisation, or community you agree to abide by its terms.
 
 [license]: license
 
-[author]: http://denysdovhan.com
+[author]: https://denysdovhan.com
 
 [npm]: https://docs.npmjs.com/cli/install
 
@@ -110,9 +110,9 @@ repository, organisation, or community you agree to abide by its terms.
 
 [locale]: https://github.com/A/textr#locale-option-consistence
 
-[iso]: http://www.wikiwand.com/en/List_of_ISO_639-1_codes
+[iso]: https://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
-[typewriter-habits]: http://practicaltypography.com/typewriter-habits.html
+[typewriter-habits]: https://practicaltypography.com/typewriter-habits.html
 
 [textr]: https://github.com/A/textr
 
