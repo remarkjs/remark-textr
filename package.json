@@ -1,6 +1,6 @@
 {
   "name": "remark-textr",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "description": "remark plugin to integrate with Textr",
   "license": "MIT",
   "keywords": [
