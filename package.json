@@ -32,20 +32,20 @@
     "unist-util-visit": "^1.0.0"
   },
   "devDependencies": {
-    "mocha": "^6.0.0",
     "nyc": "^14.0.0",
     "prettier": "^1.14.2",
     "remark": "^10.0.0",
     "remark-cli": "^6.0.0",
     "remark-preset-wooorm": "^5.0.0",
+    "tape": "^4.0.0",
     "typographic-ellipses": "^1.0.11",
     "typographic-quotes": "^2.0.1",
     "xo": "^0.24.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
-    "test-api": "mocha",
-    "test-coverage": "nyc --reporter lcov mocha test.js",
+    "test-api": "node test",
+    "test-coverage": "nyc --reporter lcov tape test.js",
     "test": "npm run format && npm run test-coverage"
   },
   "nyc": {

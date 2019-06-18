@@ -1,37 +1,28 @@
-/* eslint-env mocha */
-
-var equal = require('assert').strictEqual
+var test = require('tape')
 var remark = require('remark')
 var typographicQuotes = require('typographic-quotes')
 var textr = require('.')
 
-// Textr plugin — just function to replace triple dots to ellipses
-function ellipses(input) {
-  return input.replace(/\.{3}/gim, '…')
-}
-
-it('should work without arguments', function() {
-  equal(
+test('textr', function(t) {
+  t.equal(
     remark()
       .use(textr)
       .processSync('## spread operator...\n')
       .toString(),
-    '## spread operator...\n'
+    '## spread operator...\n',
+    'should work without arguments'
   )
-})
 
-it('should work without plugins', function() {
-  equal(
+  t.equal(
     remark()
       .use(textr, {options: {locale: 'ru'}})
       .processSync('## spread operator...\n')
       .toString(),
-    '## spread operator...\n'
+    '## spread operator...\n',
+    'should work without plugins'
   )
-})
 
-it('should run textr on a node', function() {
-  equal(
+  t.equal(
     remark()
       .use(textr, {plugins: [ellipses]})
       .processSync(
@@ -48,12 +39,11 @@ it('should run textr on a node', function() {
       '',
       '    function(...args) { return args; }',
       ''
-    ].join('\n')
+    ].join('\n'),
+    'should run textr on a node'
   )
-})
 
-it('should support options', function() {
-  equal(
+  t.equal(
     remark()
       .use(textr, {
         plugins: ['typographic-ellipses', typographicQuotes],
@@ -61,6 +51,14 @@ it('should support options', function() {
       })
       .processSync('yo "there" ...\n')
       .toString(),
-    'yo «there» …\n'
+    'yo «there» …\n',
+    'should support options'
   )
+
+  t.end()
 })
+
+// Textr plugin: just a function to replace triple dots to ellipses.
+function ellipses(input) {
+  return input.replace(/\.{3}/gim, '…')
+}
