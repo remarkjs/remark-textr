@@ -84,6 +84,13 @@ For example, you may want to set the [ISO 639][iso] [locale code][locale] of the
 content, which is important for stuff like the correct primary and secondary
 quotes.
 
+## Security
+
+Use of `remark-textr` does not involve [**rehype**][rehype] ([**hast**][hast])
+or user content so there are no openings for [cross-site scripting (XSS)][xss]
+attacks.
+[Textr][] operates on text nodes, which are always escaped by remark.
+
 ## Contribute
 
 See [`contributing.md`][contributing] in [`remarkjs/.github`][health] for ways
@@ -151,3 +158,9 @@ abide by its terms.
 [iso]: https://www.wikiwand.com/en/List_of_ISO_639-1_codes
 
 [typewriter-habits]: https://practicaltypography.com/typewriter-habits.html
+
+[xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
+
+[rehype]: https://github.com/rehypejs/rehype
+
+[hast]: https://github.com/syntax-tree/hast
