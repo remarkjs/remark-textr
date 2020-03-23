@@ -3,11 +3,11 @@ var otextr = require('textr')
 
 module.exports = textr
 
-function textr(config) {
-  var conf = config || {}
-  var tf = otextr(conf.options || {})
+function textr(options) {
+  var settings = options || {}
+  var tf = otextr(settings.options || {})
 
-  tf.use.apply(tf, (conf.plugins || []).map(load))
+  tf.use.apply(tf, (settings.plugins || []).map(load))
 
   return transform
 
