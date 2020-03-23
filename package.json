@@ -17,6 +17,10 @@
   ],
   "repository": "remarkjs/remark-textr",
   "bugs": "https://github.com/remarkjs/remark-textr/issues",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/unified"
+  },
   "author": "Denys Dovhan <email@denysdovhan.com> (https://denysdovhan.com)",
   "contributors": [
     "Denys Dovhan <email@denysdovhan.com> (https://denysdovhan.com)",
