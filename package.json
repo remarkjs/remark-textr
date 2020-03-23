@@ -37,15 +37,15 @@
     "unist-util-visit": "^1.0.0"
   },
   "devDependencies": {
-    "nyc": "^14.0.0",
-    "prettier": "^1.14.2",
+    "nyc": "^15.0.0",
+    "prettier": "^2.0.0",
     "remark": "^11.0.0",
     "remark-cli": "^7.0.0",
     "remark-preset-wooorm": "^6.0.0",
     "tape": "^4.0.0",
-    "typographic-ellipses": "^1.0.11",
-    "typographic-quotes": "^2.0.1",
-    "xo": "^0.24.0"
+    "typographic-ellipses": "^1.0.0",
+    "typographic-quotes": "^2.0.0",
+    "xo": "^0.28.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier --write \"**/*.js\" && xo --fix",
@@ -69,7 +69,10 @@
   },
   "xo": {
     "prettier": true,
-    "esnext": false
+    "esnext": false,
+    "rules": {
+      "unicorn/string-content": "off"
+    }
   },
   "remarkConfig": {
     "plugins": [

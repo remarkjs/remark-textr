@@ -3,12 +3,9 @@ var remark = require('remark')
 var typographicQuotes = require('typographic-quotes')
 var textr = require('.')
 
-test('textr', function(t) {
+test('textr', function (t) {
   t.equal(
-    remark()
-      .use(textr)
-      .processSync('## spread operator...\n')
-      .toString(),
+    remark().use(textr).processSync('## spread operator...\n').toString(),
     '## spread operator...\n',
     'should work without arguments'
   )
