@@ -45,7 +45,7 @@
     "tape": "^5.0.0",
     "typographic-ellipses": "^1.0.0",
     "typographic-quotes": "^2.0.0",
-    "xo": "^0.32.0"
+    "xo": "^0.33.0"
   },
   "scripts": {
     "format": "remark . -qfo && prettier . --write && xo --fix",
