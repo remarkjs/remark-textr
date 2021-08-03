@@ -3,7 +3,7 @@ import {remark} from 'remark'
 import typographicQuotes from 'typographic-quotes'
 import remarkText from './index.js'
 
-test('remarkText', async function (t) {
+test('remarkText', async (t) => {
   t.equal(
     (
       await remark().use(remarkText).process('## spread operator...\n')
