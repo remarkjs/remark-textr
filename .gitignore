@@ -1,6 +1,5 @@
-.DS_Store
-npm-debug.log
-.nyc_output/
-node_modules/
 coverage/
+node_modules/
+*.log
+.DS_Store
 yarn.lock
