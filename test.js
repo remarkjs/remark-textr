@@ -1,11 +1,13 @@
 import test from 'tape'
-import remark from 'remark'
+import {remark} from 'remark'
 import typographicQuotes from 'typographic-quotes'
-import textr from './index.js'
+import remarkText from './index.js'
 
-test('textr', async function (t) {
+test('remarkText', async function (t) {
   t.equal(
-    (await remark().use(textr).process('## spread operator...\n')).toString(),
+    (
+      await remark().use(remarkText).process('## spread operator...\n')
+    ).toString(),
     '## spread operator...\n',
     'should work without arguments'
   )
@@ -13,7 +15,7 @@ test('textr', async function (t) {
   t.equal(
     (
       await remark()
-        .use(textr, {options: {locale: 'ru'}})
+        .use(remarkText, {options: {locale: 'ru'}})
         .process('## spread operator...\n')
     ).toString(),
     '## spread operator...\n',
@@ -23,7 +25,7 @@ test('textr', async function (t) {
   t.equal(
     (
       await remark()
-        .use(textr, {plugins: [ellipses]})
+        .use(remarkText, {plugins: [ellipses]})
         .process(
           [
             '## spread operator...',
@@ -45,7 +47,7 @@ test('textr', async function (t) {
   t.equal(
     (
       await remark()
-        .use(textr, {
+        .use(remarkText, {
           plugins: ['typographic-ellipses', typographicQuotes],
           options: {locale: 'ru'}
         })
