@@ -1,5 +1,9 @@
+/** @typedef {import('./index.js').TextrPlugin} TextrPlugin */
+
 import test from 'tape'
 import {remark} from 'remark'
+/** @type {TextrPlugin} */
+// @ts-expect-error: untyped.
 import typographicQuotes from 'typographic-quotes'
 import remarkText from './index.js'
 
@@ -61,6 +65,7 @@ test('remarkText', async (t) => {
 })
 
 // Textr plugin: just a function to replace triple dots to ellipses.
+/** @type {TextrPlugin} */
 function ellipses(input) {
   return input.replace(/\.{3}/gim, '…')
 }
