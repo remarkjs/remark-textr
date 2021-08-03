@@ -1,25 +1,20 @@
-var visit = require('unist-util-visit')
-var otextr = require('textr')
+import visit from 'unist-util-visit'
+import otextr from 'textr'
 
-module.exports = textr
-
-function textr(options) {
+export default function remarkTextr(options) {
   var settings = options || {}
-  var tf = otextr(settings.options || {})
-
-  tf.use.apply(tf, (settings.plugins || []).map(load))
+  const promise = Promise.all(
+    (settings.plugins || []).map(async (fn) =>
+      typeof fn === 'string' ? (await import(fn)).default : fn
+    )
+  ).then((list) => otextr(settings.options || {}).use(...list))
 
   return transform
 
-  function transform(tree) {
-    visit(tree, 'text', visitor)
+  async function transform(tree) {
+    const tf = await promise
+    visit(tree, 'text', (node) => {
+      node.value = tf(node.value)
+    })
   }
-
-  function visitor(node) {
-    node.value = tf(node.value)
-  }
-}
-
-function load(fn) {
-  return typeof fn === 'string' ? require(fn) : fn
 }

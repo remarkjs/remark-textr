@@ -1,36 +1,38 @@
-var test = require('tape')
-var remark = require('remark')
-var typographicQuotes = require('typographic-quotes')
-var textr = require('.')
+import test from 'tape'
+import remark from 'remark'
+import typographicQuotes from 'typographic-quotes'
+import textr from './index.js'
 
-test('textr', function (t) {
+test('textr', async function (t) {
   t.equal(
-    remark().use(textr).processSync('## spread operator...\n').toString(),
+    (await remark().use(textr).process('## spread operator...\n')).toString(),
     '## spread operator...\n',
     'should work without arguments'
   )
 
   t.equal(
-    remark()
-      .use(textr, {options: {locale: 'ru'}})
-      .processSync('## spread operator...\n')
-      .toString(),
+    (
+      await remark()
+        .use(textr, {options: {locale: 'ru'}})
+        .process('## spread operator...\n')
+    ).toString(),
     '## spread operator...\n',
     'should work without plugins'
   )
 
   t.equal(
-    remark()
-      .use(textr, {plugins: [ellipses]})
-      .processSync(
-        [
-          '## spread operator...',
-          '',
-          '    function(...args) { return args; }',
-          ''
-        ].join('\n')
-      )
-      .toString(),
+    (
+      await remark()
+        .use(textr, {plugins: [ellipses]})
+        .process(
+          [
+            '## spread operator...',
+            '',
+            '    function(...args) { return args; }',
+            ''
+          ].join('\n')
+        )
+    ).toString(),
     [
       '## spread operator…',
       '',
@@ -41,13 +43,14 @@ test('textr', function (t) {
   )
 
   t.equal(
-    remark()
-      .use(textr, {
-        plugins: ['typographic-ellipses', typographicQuotes],
-        options: {locale: 'ru'}
-      })
-      .processSync('yo "there" ...\n')
-      .toString(),
+    (
+      await remark()
+        .use(textr, {
+          plugins: ['typographic-ellipses', typographicQuotes],
+          options: {locale: 'ru'}
+        })
+        .process('yo "there" ...\n')
+    ).toString(),
     'yo «there» …\n',
     'should support options'
   )
