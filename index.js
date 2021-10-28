@@ -7,6 +7,8 @@
  *   Value to transform.
  * @param {object} [options]
  *   Global configuration passed to textr.
+ * @returns {string|void}
+ *   Changed text (optional).
  *
  * @typedef Options
  *   Configuration.
