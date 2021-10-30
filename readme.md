@@ -8,24 +8,62 @@
 [![Backers][backers-badge]][collective]
 [![Chat][chat-badge]][chat]
 
-[**remark**][remark] plugin to [make your typography better][typewriter-habits]
-with [**Textr**][textr].
+**[remark][]** plugin to [improve typography][typewriter-habits] with
+[**Textr**][textr].
 
-## Note!
+## Contents
 
-This plugin is ready for the new parser in remark
-([`remarkjs/remark#536`](https://github.com/remarkjs/remark/pull/536)).
-No change is needed: it works exactly the same now as it did before!
+*   [What is this?](#what-is-this)
+*   [When should I use this?](#when-should-i-use-this)
+*   [Install](#install)
+*   [Use](#use)
+*   [API](#api)
+    *   [`unified().use(remarkTextr[, options])`](#unifieduseremarktextr-options)
+*   [Types](#types)
+*   [Compatibility](#compatibility)
+*   [Security](#security)
+*   [Contribute](#contribute)
+*   [License](#license)
+
+## What is this?
+
+This package is a [unified][] ([remark][]) plugin to support [Textr][].
+
+**unified** is a project that transforms content with abstract syntax trees
+(ASTs).
+**remark** adds support for markdown to unified.
+**mdast** is the markdown AST that remark uses.
+This is a remark plugin that transforms mdast with Textr.
+
+## When should I use this?
+
+This project is useful if you want to automatically improve the text in your
+markdown documents.
+[Textr][] is a simple way to do that: no need to worry about ASTs.
+On the other hand, ASTs are powerful, so some things are better done with
+custom plugins: see [Create a plugin][create-a-plugin].
 
 ## Install
 
-This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c):
-Node 12+ is needed to use it and it must be `import`ed instead of `require`d.
-
-[npm][]:
+This package is [ESM only](https://gist.github.com/sindresorhus/a39789f98801d908bbc7ff3ecc99d99c).
+In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 
 ```sh
 npm install remark-textr
+```
+
+In Deno with [Skypack][]:
+
+```js
+import remarkTextr from 'https://cdn.skypack.dev/remark-textr@5?dts'
+```
+
+In browsers with [Skypack][]:
+
+```html
+<script type="module">
+  import remarkTextr from 'https://cdn.skypack.dev/remark-textr@5?min'
+</script>
 ```
 
 ## Use
@@ -40,23 +78,28 @@ function(...args) { return args; }
 ```
 ````
 
-And our script, `example.js`, looks as follows:
+And our module `example.js` looks as follows:
 
 ```js
-import {readSync} from 'to-vfile'
+import {read} from 'to-vfile'
 import {remark} from 'remark'
 import remarkTextr from 'remark-textr'
 
-const file = readSync('example.md')
+main()
 
-remark()
-  .use(remarkTextr, {plugins: [ellipses]})
-  .process(file)
-  .then((file) => {
-    console.log(String(file))
-  })
+async function main() {
+  const file = await remark()
+    .use(remarkTextr, {plugins: [ellipses]})
+    .process(await read('example.md'))
 
-// Textr plugin: just a function to replace triple dots to ellipses.
+  console.log(String(file))
+}
+
+/**
+ * Textr plugin: a function that replaces triple dots with ellipses.
+ *
+ * @type {import('remark-textr').TextrPlugin}
+ */
 function ellipses(input) {
   return input.replace(/\.{3}/gim, '…')
 }
@@ -77,26 +120,43 @@ function(...args) { return args; }
 This package exports no identifiers.
 The default export is `remarkTextr`.
 
-### `unified().use(remarkTextr[, config])`
+### `unified().use(remarkTextr[, options])`
 
-[Make your typography better][typewriter-habits] with [**Textr**][textr].
+Plugin to [improve typography][typewriter-habits] with [**Textr**][textr].
 
-##### `config`
+##### `options`
 
-###### `config.plugins`
+Configuration.
+
+###### `options.plugins`
 
 List of [Textr][] plugins (`Array.<string|Function>?`).
-If strings are passed in, those are loaded with `require`.
-Textr plugins are available on npm, labelled with [textr][textr-plugins]
+If strings are passed in, those are loaded with `import`.
+Textr plugins are available on npm labelled with a [`textr`][textr-plugins]
 keyword.
 You can also create them yourself, as shown in the example above.
 
-###### `config.options`
+###### `options.options`
 
 [Textr][] options (`Object?`).
-For example, you may want to set the [ISO 639][iso] [locale code][locale] of the
-content, which is important for stuff like the correct primary and secondary
+For example, you may want to set the [ISO 639-1][iso] [locale code][locale] of
+the content, which is important for stuff like the correct primary and secondary
 quotes.
+
+## Types
+
+This package is fully typed with [TypeScript][].
+It exports `Options` and `TextrPlugin` types, which specify the interface of the
+accepted options and Textr plugins.
+
+## Compatibility
+
+Projects maintained by the unified collective are compatible with all maintained
+versions of Node.js.
+As of now, that is Node.js 12.20+, 14.14+, and 16.0+.
+Our projects sometimes work with older versions, but this is not guaranteed.
+
+This plugin works with `unified` version 6+ and `remark` version 7+.
 
 ## Security
 
@@ -149,6 +209,8 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
+[skypack]: https://www.skypack.dev
+
 [health]: https://github.com/remarkjs/.github
 
 [contributing]: https://github.com/remarkjs/.github/blob/HEAD/contributing.md
@@ -163,6 +225,8 @@ abide by its terms.
 
 [remark]: https://github.com/remarkjs/remark
 
+[unified]: https://github.com/unifiedjs/unified
+
 [textr]: https://github.com/A/textr
 
 [textr-plugins]: https://www.npmjs.com/browse/keyword/textr
@@ -175,6 +239,10 @@ abide by its terms.
 
 [xss]: https://en.wikipedia.org/wiki/Cross-site_scripting
 
+[typescript]: https://www.typescriptlang.org
+
 [rehype]: https://github.com/rehypejs/rehype
 
 [hast]: https://github.com/syntax-tree/hast
+
+[create-a-plugin]: https://unifiedjs.com/learn/guide/create-a-plugin/

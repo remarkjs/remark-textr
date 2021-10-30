@@ -2,26 +2,34 @@
  * @typedef {import('mdast').Root} Root
  *
  * @callback TextrPlugin
+ *   A textr plugin.
  * @param {string} value
+ *   Value to transform.
  * @param {object} [options]
+ *   Global configuration passed to textr.
+ * @returns {string|void}
+ *   Changed text (optional).
  *
- * @typedef Config
+ * @typedef Options
+ *   Configuration.
  * @property {Array.<string|TextrPlugin>} [plugins]
+ *   Textr plugins.
  * @property {object} [options]
+ *   Configuration passed to `textr`.
  */
 
 import {visit} from 'unist-util-visit'
 import textr from 'textr'
 
 /**
- * Plugin to make your typography better with Textr.
+ * Plugin to improve typography with Textr.
  *
- * @type {import('unified').Plugin<[Config?]|void[], Root>}
+ * @type {import('unified').Plugin<[Options?]|void[], Root>}
  */
-export default function remarkTextr(options) {
-  const settings = options || {}
+export default function remarkTextr(options = {}) {
+  const plugins = options.plugins || []
   const promise = Promise.all(
-    (settings.plugins || []).map(
+    plugins.map(
       /**
        * @returns {Promise<TextrPlugin>}
        */
@@ -29,7 +37,7 @@ export default function remarkTextr(options) {
       // type-coverage:ignore-next-line
       async (fn) => (typeof fn === 'string' ? (await import(fn)).default : fn)
     )
-  ).then((list) => textr(settings.options || {}).use(...list))
+  ).then((list) => textr(options.options || {}).use(...list))
 
   return async (tree) => {
     const typography = await promise
