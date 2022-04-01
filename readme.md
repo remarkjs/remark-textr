@@ -52,17 +52,17 @@ In Node.js (version 12.20+, 14.14+, or 16.0+), install with [npm][]:
 npm install remark-textr
 ```
 
-In Deno with [Skypack][]:
+In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import remarkTextr from 'https://cdn.skypack.dev/remark-textr@5?dts'
+import remarkTextr from 'https://esm.sh/remark-textr@5'
 ```
 
-In browsers with [Skypack][]:
+In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import remarkTextr from 'https://cdn.skypack.dev/remark-textr@5?min'
+  import remarkTextr from 'https://esm.sh/remark-textr@5?bundle'
 </script>
 ```
 
@@ -209,7 +209,7 @@ abide by its terms.
 
 [npm]: https://docs.npmjs.com/cli/install
 
-[skypack]: https://www.skypack.dev
+[esmsh]: https://esm.sh
 
 [health]: https://github.com/remarkjs/.github
 
