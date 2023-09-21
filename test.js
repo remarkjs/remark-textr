@@ -1,65 +1,74 @@
-/** @typedef {import('./index.js').TextrPlugin} TextrPlugin */
+/**
+ * @typedef {import('./index.js').TextrPlugin} TextrPlugin
+ */
 
-import test from 'tape'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import {remark} from 'remark'
-/** @type {TextrPlugin} */
 // @ts-expect-error: untyped.
-import typographicQuotes from 'typographic-quotes'
-import remarkText from './index.js'
+import typographicQuotes_ from 'typographic-quotes'
+import remarkTextr from './index.js'
 
-test('remarkText', async (t) => {
-  t.equal(
-    String(await remark().use(remarkText).process('## spread operator...\n')),
-    '## spread operator...\n',
-    'should work without arguments'
-  )
+/** @type {TextrPlugin} */
+const typographicQuotes = typographicQuotes_
 
-  t.equal(
-    String(
-      await remark()
-        .use(remarkText, {options: {locale: 'ru'}})
-        .process('## spread operator...\n')
-    ),
-    '## spread operator...\n',
-    'should work without plugins'
-  )
+test('remarkTextr', async function (t) {
+  await t.test('should work without arguments', async function () {
+    assert.equal(
+      String(
+        await remark().use(remarkTextr).process('## spread operator...\n')
+      ),
+      '## spread operator...\n'
+    )
+  })
 
-  t.equal(
-    String(
-      await remark()
-        .use(remarkText, {plugins: [ellipses]})
-        .process(
-          [
-            '## spread operator...',
-            '',
-            '    function(...args) { return args; }',
-            ''
-          ].join('\n')
-        )
-    ),
-    [
-      '## spread operator…',
-      '',
-      '    function(...args) { return args; }',
-      ''
-    ].join('\n'),
-    'should run textr on a node'
-  )
+  await t.test('should work without plugins', async function () {
+    assert.equal(
+      String(
+        await remark()
+          .use(remarkTextr, {options: {locale: 'ru'}})
+          .process('## spread operator...\n')
+      ),
+      '## spread operator...\n'
+    )
+  })
 
-  t.equal(
-    String(
-      await remark()
-        .use(remarkText, {
-          plugins: ['typographic-ellipses', typographicQuotes],
-          options: {locale: 'ru'}
-        })
-        .process('yo "there" ...\n')
-    ),
-    'yo «there» …\n',
-    'should support options'
-  )
+  await t.test('should run textr on a node', async function () {
+    assert.equal(
+      String(
+        await remark()
+          .use(remarkTextr, {plugins: [ellipses]})
+          .process(
+            [
+              '## spread operator...',
+              '',
+              '    function(...args) { return args; }',
+              ''
+            ].join('\n')
+          )
+      ),
+      [
+        '## spread operator…',
+        '',
+        '    function(...args) { return args; }',
+        ''
+      ].join('\n')
+    )
+  })
 
-  t.end()
+  await t.test('should support options', async function () {
+    assert.equal(
+      String(
+        await remark()
+          .use(remarkTextr, {
+            plugins: ['typographic-ellipses', typographicQuotes],
+            options: {locale: 'ru'}
+          })
+          .process('yo "there" ...\n')
+      ),
+      'yo «there» …\n'
+    )
+  })
 })
 
 // Textr plugin: just a function to replace triple dots to ellipses.
