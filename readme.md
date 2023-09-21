@@ -130,7 +130,7 @@ Configuration.
 
 ###### `options.plugins`
 
-List of [Textr][] plugins (`Array.<string|Function>?`).
+List of [Textr][] plugins (`Array<Function | string>?`).
 If strings are passed in, those are loaded with `import`.
 Textr plugins are available on npm labelled with a [`textr`][textr-plugins]
 keyword.
