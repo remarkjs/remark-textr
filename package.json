@@ -4,17 +4,17 @@
   "description": "remark plugin to improve typography with Textr",
   "license": "MIT",
   "keywords": [
-    "unified",
+    "markdown",
+    "mdast",
+    "plugin",
     "remark",
     "remark-plugin",
-    "plugin",
-    "mdast",
-    "markdown",
     "text",
-    "typography",
-    "typographic",
+    "textr",
     "typo",
-    "textr"
+    "typographic",
+    "typography",
+    "unified"
   ],
   "repository": "remarkjs/remark-textr",
   "bugs": "https://github.com/remarkjs/remark-textr/issues",
@@ -60,34 +60,35 @@
   },
   "scripts": {
     "build": "tsc --build --clean && tsc --build && type-coverage",
-    "format": "remark . -qfo && prettier . -w --log-level warn && xo --fix",
+    "format": "remark . --frail --output --quiet && prettier . --log-level warn --write && xo --fix",
+    "prepack": "npm run build && npm run format",
+    "test": "npm run build && npm run format && npm run test-coverage",
     "test-api": "node --conditions development test.js",
-    "test-coverage": "c8 --check-coverage --branches 100 --functions 100 --lines 100 --statements 100 --reporter lcov npm run test-api",
-    "test": "npm run build && npm run format && npm run test-coverage"
+    "test-coverage": "c8 --100 --reporter lcov npm run test-api"
   },
   "prettier": {
-    "tabWidth": 2,
-    "useTabs": false,
-    "singleQuote": true,
     "bracketSpacing": false,
+    "singleQuote": true,
     "semi": false,
-    "trailingComma": "none"
+    "tabWidth": 2,
+    "trailingComma": "none",
+    "useTabs": false
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-wooorm"
+    ]
+  },
+  "typeCoverage": {
+    "atLeast": 100,
+    "detail": true,
+    "ignoreCatch": true,
+    "strict": true
   },
   "xo": {
     "prettier": true,
     "rules": {
       "unicorn/prefer-string-replace-all": "off"
     }
-  },
-  "remarkConfig": {
-    "plugins": [
-      "preset-wooorm"
-    ]
-  },
-  "typeCoverage": {
-    "atLeast": 100,
-    "detail": true,
-    "strict": true,
-    "ignoreCatch": true
   }
 }
