@@ -9,25 +9,23 @@ import remarkText from './index.js'
 
 test('remarkText', async (t) => {
   t.equal(
-    (
-      await remark().use(remarkText).process('## spread operator...\n')
-    ).toString(),
+    String(await remark().use(remarkText).process('## spread operator...\n')),
     '## spread operator...\n',
     'should work without arguments'
   )
 
   t.equal(
-    (
+    String(
       await remark()
         .use(remarkText, {options: {locale: 'ru'}})
         .process('## spread operator...\n')
-    ).toString(),
+    ),
     '## spread operator...\n',
     'should work without plugins'
   )
 
   t.equal(
-    (
+    String(
       await remark()
         .use(remarkText, {plugins: [ellipses]})
         .process(
@@ -38,7 +36,7 @@ test('remarkText', async (t) => {
             ''
           ].join('\n')
         )
-    ).toString(),
+    ),
     [
       '## spread operator…',
       '',
@@ -49,14 +47,14 @@ test('remarkText', async (t) => {
   )
 
   t.equal(
-    (
+    String(
       await remark()
         .use(remarkText, {
           plugins: ['typographic-ellipses', typographicQuotes],
           options: {locale: 'ru'}
         })
         .process('yo "there" ...\n')
-    ).toString(),
+    ),
     'yo «there» …\n',
     'should support options'
   )

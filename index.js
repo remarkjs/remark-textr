@@ -29,14 +29,15 @@ import textr from 'textr'
 export default function remarkTextr(options = {}) {
   const plugins = options.plugins || []
   const promise = Promise.all(
-    plugins.map(
-      /**
-       * @returns {Promise<TextrPlugin>}
-       */
-      // Default is an `any`.
-      // type-coverage:ignore-next-line
-      async (fn) => (typeof fn === 'string' ? (await import(fn)).default : fn)
-    )
+    plugins.map(async (fn) => {
+      if (typeof fn === 'string') {
+        /** @type {{default: TextrPlugin}} */
+        const mod = await import(fn)
+        return mod.default
+      }
+
+      return fn
+    })
   ).then((list) => textr(options.options || {}).use(...list))
 
   return async (tree) => {
