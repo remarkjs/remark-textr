@@ -1,6 +1,6 @@
 {
   "name": "remark-textr",
-  "version": "5.0.1",
+  "version": "6.0.0",
   "description": "remark plugin to improve typography with Textr",
   "license": "MIT",
   "keywords": [

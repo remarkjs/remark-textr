@@ -51,14 +51,14 @@ npm install remark-textr
 In Deno with [`esm.sh`][esmsh]:
 
 ```js
-import remarkTextr from 'https://esm.sh/remark-textr@5'
+import remarkTextr from 'https://esm.sh/remark-textr@6'
 ```
 
 In browsers with [`esm.sh`][esmsh]:
 
 ```html
 <script type="module">
-  import remarkTextr from 'https://esm.sh/remark-textr@5?bundle'
+  import remarkTextr from 'https://esm.sh/remark-textr@6?bundle'
 </script>
 ```
 
