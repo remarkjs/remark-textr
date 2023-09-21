@@ -5,16 +5,16 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
 import {remark} from 'remark'
+import remarkTextr from 'remark-textr'
 // @ts-expect-error: untyped.
 import typographicQuotes_ from 'typographic-quotes'
-import remarkTextr from './index.js'
 
 /** @type {TextrPlugin} */
 const typographicQuotes = typographicQuotes_
 
 test('remarkTextr', async function (t) {
   await t.test('should expose the public api', async function () {
-    assert.deepEqual(Object.keys(await import('./index.js')).sort(), [
+    assert.deepEqual(Object.keys(await import('remark-textr')).sort(), [
       'default'
     ])
   })
