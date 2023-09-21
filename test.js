@@ -50,7 +50,9 @@ test('remarkTextr', async function (t) {
       [
         '## spread operator…',
         '',
-        '    function(...args) { return args; }',
+        '```',
+        'function(...args) { return args; }',
+        '```',
         ''
       ].join('\n')
     )
