@@ -77,6 +77,20 @@ test('remarkTextr', async function (t) {
       'yo «there» …\n'
     )
   })
+
+  await t.test('should support syncronous transformer', async function () {
+    assert.equal(
+      String(
+        await remark()
+          .use(remarkTextr, {
+            plugins: [typographicQuotes],
+            options: {locale: 'ru'}
+          })
+          .process('yo "there" \n')
+      ),
+      'yo «there»\n'
+    )
+  })
 })
 
 // Textr plugin: just a function to replace triple dots to ellipses.
