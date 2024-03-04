@@ -78,15 +78,15 @@ test('remarkTextr', async function (t) {
     )
   })
 
-  await t.test('should support syncronous transformer', async function () {
+  t.test('should support syncronous transformer', function () {
     assert.equal(
       String(
-        await remark()
+        remark()
           .use(remarkTextr, {
             plugins: [typographicQuotes],
             options: {locale: 'ru'}
           })
-          .process('yo "there" \n')
+          .processSync('yo "there" \n')
       ),
       'yo «there»\n'
     )
